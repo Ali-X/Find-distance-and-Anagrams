@@ -7,15 +7,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reverse(reader.readLine());
-
     }
 
-    private static void reverse(String word){
+    private static void reverse(String word) {
         int start = 0;
         int end = 0;
+        boolean isEnd = false;
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == ' ' || i == word.length()-1) {
-                end = (i == word.length()-1) ? i : i - 1;
+            if (i == word.length() - 1) isEnd = true;
+            if (word.charAt(i) == ' ' || isEnd) {
+                if (isEnd)
+                    end = i;
+                else
+                    end = i - 1;
                 while (end >= start) {
                     System.out.print(word.charAt(end));
                     --end;
@@ -23,6 +27,7 @@ public class Main {
                 start = i + 1;
                 System.out.print(" ");
             }
+
         }
     }
 }
